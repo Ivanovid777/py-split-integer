@@ -26,25 +26,22 @@ class TestSplitInteger:
 
 
     @pytest.mark.parametrize(
-        "value,parts",
+        "value,parts,parts_list",
         [
-            (9, 3),
-            (16, 4),
-            (25, 5),
-            (121, 11),
+            (9, 3, [3, 3, 3]),
+            (16, 4, [4, 4, 4, 4]),
+            (25, 5, [5, 5, 5, 5, 5])
         ],
         ids=[
             "all parts and their amount should equal 3",
             "all parts and their amount should equal 4",
-            "all parts and their amount should equal 5",
-            "all parts and their amount should equal 11"
+            "all parts and their amount should equal 5"
         ]
     )
-    def test_should_split_into_equal_parts_when_value_divisible_by_parts(self, value, parts) -> None:
-        parts_list = split_integer(value, parts)
-        assert len(parts_list) == parts, f"number of parts should equal {parts}"
-        for part in range(0, len(parts_list) - 1):
-            assert parts_list[part] == parts_list[part + 1], f"{parts_list[part]} does not equal {part + 1}"
+    def test_should_split_into_equal_parts_when_value_divisible_by_parts(self, value, parts, parts_list) -> None:
+        act_parts_list = split_integer(value, parts)
+        assert len(act_parts_list) == parts, f"number of parts should equal {parts}"
+        assert parts_list == act_parts_list, f"parts is different from {parts}"
 
 
     @pytest.mark.parametrize(
