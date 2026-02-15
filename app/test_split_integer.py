@@ -20,8 +20,9 @@ class TestSplitInteger:
         ]
     )
     def test_sum_of_the_parts_should_be_equal_to_value(self, value, parts) -> None:
-        sum_of_the_parts = sum(split_integer(value, parts))
-        assert sum_of_the_parts == value, f"sum of parts does not equal {value}"
+        parts_list = split_integer(value, parts)
+        assert max(parts_list) - min(parts_list) <= 1, f"difference btw max and min number should be <= 1"
+        assert sum(parts_list) == value, f"sum of parts does not equal {value}"
 
 
     @pytest.mark.parametrize(
