@@ -19,10 +19,28 @@ class TestSplitInteger:
             "sum of parts should be 32"
         ]
     )
-    def test_sum_of_the_parts_should_be_equal_to_value(self, value, parts) -> None:
+    def test_difference_between_max_and_min_is_at_most_one(self, value, parts):
         parts_list = split_integer(value, parts)
         assert max(parts_list) - min(parts_list) <= 1, f"difference btw max and min number should be <= 1"
-        assert sum(parts_list) == value, f"sum of parts does not equal {value}"
+
+
+    @pytest.mark.parametrize(
+        "value,parts",
+        [
+            (8, 1),
+            (6, 2),
+            (17, 4),
+            (32, 6),
+        ],
+        ids=[
+            "sum of parts should be 8",
+            "sum of parts should be 6",
+            "sum of parts should be 17",
+            "sum of parts should be 32"
+        ]
+    )
+    def test_sum_of_the_parts_should_be_equal_to_value(self, value, parts) -> None:
+        assert sum(split_integer(value, parts)) == value, f"sum of parts does not equal {value}"
 
 
     @pytest.mark.parametrize(
